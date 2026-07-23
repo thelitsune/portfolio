@@ -2,6 +2,7 @@
 import { useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
 import { projects, type Project } from '@/data/projects';
+import PreviewModal from './PreviewModal';
 
 const categories: { key: string; label: string }[] = [
   { key: 'all', label: 'All Projects' },
@@ -19,6 +20,7 @@ const statusColors: Record<string, string> = {
 
 export default function Projects() {
   const [filter, setFilter] = useState('all');
+  const [preview, setPreview] = useState<{ url: string; title: string } | null>(null);
   const ref = useRef(null);
   const inView = useInView(ref, { once: true, margin: '-80px' });
 
@@ -53,12 +55,12 @@ export default function Projects() {
           >
             {filtered.length === 0 ? (
               <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} className="sm:col-span-2 text-center py-20">
-                <p className="text-muted font-mono text-sm">// no projects in this category yet — check back soon</p>
+                <p className="text-muted font-mono text-sm">// no projects in this category yet \u2014 check back soon</p>
               </motion.div>
             ) : (
               filtered.map((project, i) => (
                 <motion.div key={project.id} initial={{ opacity:0, y:24 }} animate={{ opacity:1, y:0 }} transition={{ delay:i*0.08, duration:0.45 }}>
-                  <ProjectCard project={project} />
+                  <ProjectCard project={project} onPreview={setPreview} />
                 </motion.div>
               ))
             )}
@@ -69,17 +71,40 @@ export default function Projects() {
           <p className="text-muted/50 text-xs sm:text-sm font-mono">// more projects coming soon...</p>
         </motion.div>
       </div>
+
+      <PreviewModal url={preview?.url ?? null} title={preview?.title ?? ''} onClose={() => setPreview(null)} />
     </section>
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
+function ProjectCard({ project, onPreview }: { project: Project; onPreview: (p: { url: string; title: string }) => void }) {
   const [hovered, setHovered] = useState(false);
+  const clickable = Boolean(project.liveUrl);
+
+  const handleClick = () => {
+    if (project.liveUrl) onPreview({ url: project.liveUrl, title: project.title });
+  };
+
   return (
-    <div className="project-card p-5 sm:p-6 h-full" onMouseEnter={()=>setHovered(true)} onMouseLeave={()=>setHovered(false)}>
+    <div
+      className={`project-card p-5 sm:p-6 h-full ${clickable ? 'cursor-pointer' : ''}`}
+      onMouseEnter={()=>setHovered(true)}
+      onMouseLeave={()=>setHovered(false)}
+      onClick={clickable ? handleClick : undefined}
+      role={clickable ? 'button' : undefined}
+      tabIndex={clickable ? 0 : undefined}
+      onKeyDown={clickable ? (e) => { if (e.key === 'Enter') handleClick(); } : undefined}
+    >
       <div className="absolute inset-0 rounded-[18px] transition-opacity duration-500 pointer-events-none"
         style={{ background:`radial-gradient(circle at 50% 0%, ${project.color}12, transparent 65%)`, opacity: hovered?1:0 }}
       />
+      {clickable && (
+        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full transition-opacity duration-300"
+          style={{ background:`${project.color}18`, border:`1px solid ${project.color}35`, color: project.color, opacity: hovered ? 1 : 0.7 }}>
+          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+          Preview
+        </div>
+      )}
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -100,12 +125,12 @@ function ProjectCard({ project }: { project: Project }) {
             <span key={t} className="text-xs font-mono px-2.5 py-1 rounded-lg border" style={{ background:`${project.color}0c`, borderColor:`${project.color}22`, color:`${project.color}bb` }}>{t}</span>
           ))}
         </div>
-        <div className="flex items-center gap-3 pt-4 border-t border-border/40">
+        <div className="flex items-center gap-3 pt-4 border-t border-border/40" onClick={(e) => e.stopPropagation()}>
           {project.liveUrl ? (
-            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-primary text-xs py-2 px-4">
+            <button onClick={handleClick} className="btn-primary text-xs py-2 px-4">
               <span>View Live</span>
-              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" /></svg>
-            </a>
+              <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+            </button>
           ) : (
             <span className="text-xs font-mono text-muted/40">Coming soon...</span>
           )}

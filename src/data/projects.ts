@@ -36,6 +36,7 @@ export const projects: Project[] = [
     status: 'live',
     color: '#10b981',
     icon: '\u{1F4E6}',
+    liveUrl: 'https://peekinside.io/',
     featured: true,
   },
   {

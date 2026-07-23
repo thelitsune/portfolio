@@ -28,16 +28,18 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
 .glow-text { text-shadow: 0 0 40px rgba(0,212,255,0.4); }
 
 .glow-border {
-  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.02);
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.35), 0 0 30px rgba(0, 212, 255, 0.3), inset 0 0 20px rgba(0, 212, 255, 0.04);
+  border: 1px solid rgba(0, 212, 255, 0.3) !important;
 }
 
 .card-hover {
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(0, 212, 255, 0.12) !important;
 }
 .card-hover:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 20px 60px rgba(0, 212, 255, 0.18);
-  border-color: rgba(0, 212, 255, 0.45);
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 0 0 1px rgba(0, 212, 255, 0.5), 0 25px 70px rgba(0, 212, 255, 0.35), 0 0 60px rgba(0, 212, 255, 0.25);
+  border-color: rgba(0, 212, 255, 0.7) !important;
 }
 
 .tech-badge {
@@ -112,8 +114,8 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
   transition: all 0.3s ease;
 }
 .skill-icon-box:hover {
-  transform: scale(1.1) rotate(-4deg);
-  box-shadow: 0 0 24px currentColor;
+  transform: scale(1.15) rotate(-6deg);
+  box-shadow: 0 0 30px currentColor, 0 0 60px currentColor;
 }
 
 @keyframes borderGlow {
