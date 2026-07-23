@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://quinn-portfolio-pixlify.vercel.app/sitemap.xml
