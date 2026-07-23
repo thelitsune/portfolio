@@ -27,6 +27,19 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
 
 .glow-text { text-shadow: 0 0 40px rgba(0,212,255,0.4); }
 
+.glow-border {
+  box-shadow: 0 0 20px rgba(0, 212, 255, 0.2), inset 0 0 20px rgba(0, 212, 255, 0.02);
+}
+
+.card-hover {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.card-hover:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(0, 212, 255, 0.18);
+  border-color: rgba(0, 212, 255, 0.45);
+}
+
 .tech-badge {
   display: inline-flex;
   align-items: center;
@@ -40,7 +53,7 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
   transition: all 0.2s ease;
   white-space: nowrap;
 }
-.tech-badge:hover { background: rgba(0,212,255,0.15); border-color: rgba(0,212,255,0.5); transform: scale(1.05); }
+.tech-badge:hover { background: rgba(0,212,255,0.18); border-color: rgba(0,212,255,0.6); transform: scale(1.08); box-shadow: 0 0 16px rgba(0,212,255,0.3); }
 
 .btn-primary {
   position: relative;
@@ -67,8 +80,8 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-.btn-primary:hover::before { opacity: 0.12; }
-.btn-primary:hover { border-color: #00d4ff; box-shadow: 0 0 30px rgba(0,212,255,0.25); transform: translateY(-2px); }
+.btn-primary:hover::before { opacity: 0.15; }
+.btn-primary:hover { border-color: #00d4ff; box-shadow: 0 0 32px rgba(0,212,255,0.35); transform: translateY(-2px); }
 .btn-primary span, .btn-primary svg { position: relative; z-index: 1; }
 
 .project-card {
@@ -90,9 +103,17 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
 }
 .project-card:hover::before { opacity: 1; }
 .project-card:hover {
-  border-color: rgba(0,212,255,0.3);
-  transform: translateY(-6px);
-  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 40px rgba(0,212,255,0.08);
+  border-color: rgba(0,212,255,0.35);
+  transform: translateY(-8px);
+  box-shadow: 0 30px 80px rgba(0,0,0,0.5), 0 0 50px rgba(0,212,255,0.15);
+}
+
+.skill-icon-box {
+  transition: all 0.3s ease;
+}
+.skill-icon-box:hover {
+  transform: scale(1.1) rotate(-4deg);
+  box-shadow: 0 0 24px currentColor;
 }
 
 @keyframes borderGlow {
@@ -106,3 +127,13 @@ body { background-color: #050a0e; color: #e2e8f0; font-family: 'Inter', system-u
   50% { transform: translateY(-14px); }
 }
 .float-anim { animation: float 6s ease-in-out infinite; }
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+.shimmer {
+  background: linear-gradient(90deg, transparent 0%, rgba(0,212,255,0.12) 50%, transparent 100%);
+  background-size: 200% auto;
+  animation: shimmer 3s linear infinite;
+}
