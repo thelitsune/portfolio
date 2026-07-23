@@ -21,9 +21,10 @@ export const projects: Project[] = [
     longDesc: 'A Place-inspired collaborative pixel art platform where thousands can paint together in real time. Features layer management, color palettes, and live multiplayer sessions.',
     tech: ['Next.js', 'Supabase', 'TypeScript', 'WebSockets', 'Tailwind'],
     category: 'web',
-    status: 'live',
+    status: 'beta',
     color: '#00d4ff',
     icon: '\u{1F3A8}',
+    liveUrl: 'https://pixlify.space',
     featured: true,
   },
   {
