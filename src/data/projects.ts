@@ -23,7 +23,7 @@ export const projects: Project[] = [
     category: 'web',
     status: 'live',
     color: '#00d4ff',
-    icon: '',
+    icon: '\u{1F3A8}',
     featured: true,
   },
   {
@@ -35,7 +35,7 @@ export const projects: Project[] = [
     category: 'saas',
     status: 'live',
     color: '#10b981',
-    icon: '',
+    icon: '\u{1F4E6}',
     featured: true,
   },
   {
@@ -47,7 +47,7 @@ export const projects: Project[] = [
     category: 'game',
     status: 'in-progress',
     color: '#7c3aed',
-    icon: '',
+    icon: '\u{1F3B2}',
     featured: true,
   },
   {
@@ -59,7 +59,7 @@ export const projects: Project[] = [
     category: 'saas',
     status: 'beta',
     color: '#f59e0b',
-    icon: '',
+    icon: '\u{1F4CA}',
     featured: false,
   },
 ];

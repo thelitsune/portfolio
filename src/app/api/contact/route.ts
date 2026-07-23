@@ -55,7 +55,7 @@ export async function POST(req: NextRequest) {
                 <tr><td style="padding:12px 0;color:#64748b;font-size:12px;text-transform:uppercase;letter-spacing:2px;vertical-align:top">Message</td><td style="padding:12px 0;color:#e2e8f0;font-size:15px;line-height:1.7">${message.replace(/\n/g, '<br>')}</td></tr>
               </table>
               <div style="margin-top:28px;padding:16px;background:rgba(0,212,255,0.04);border:1px solid rgba(0,212,255,0.1);border-radius:10px">
-                <a href="mailto:${email}?subject=Re: Your message to Quinn" style="display:inline-block;padding:12px 24px;background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(124,58,237,0.15));border:1px solid rgba(0,212,255,0.4);border-radius:8px;color:#00d4ff;text-decoration:none;font-size:13px">↩ Reply to ${name}</a>
+                <a href="mailto:${email}?subject=Re: Your message to Quinn" style="display:inline-block;padding:12px 24px;background:linear-gradient(135deg,rgba(0,212,255,0.15),rgba(124,58,237,0.15));border:1px solid rgba(0,212,255,0.4);border-radius:8px;color:#00d4ff;text-decoration:none;font-size:13px">\u21A9 Reply to ${name}</a>
               </div>
             </div>
             <div style="padding:20px 32px;background:#050a0e;border-top:1px solid #1f2937">
@@ -71,11 +71,11 @@ export async function POST(req: NextRequest) {
         from: `"Quinn Portfolio" <${process.env.SMTP_USER}>`,
         to: 'admin@litsune.com',
         replyTo: email,
-        subject: `✉️ New message from ${name} — Quinn Portfolio`,
+        subject: `\u2709\uFE0F New message from ${name} — Quinn Portfolio`,
         html: emailHtml,
       });
     } else {
-      console.log(' [Contact Form - no SMTP configured]', { name, email, message: message.slice(0, 100) });
+      console.log('\u{1F4EC} [Contact Form - no SMTP configured]', { name, email, message: message.slice(0, 100) });
     }
 
     return NextResponse.json({ success: true, message: 'Message received! Quinn will get back to you within 24 hours.' });

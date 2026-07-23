@@ -39,9 +39,9 @@ export default function Contact() {
         <div className="grid md:grid-cols-5 gap-8 sm:gap-10">
           <motion.div initial={{ opacity:0, x:-30 }} animate={inView?{opacity:1,x:0}:{}} transition={{ duration:0.6, delay:0.1 }} className="md:col-span-2 space-y-5 sm:space-y-6">
             {[
-              { icon:'', label:'Location', value:'Griffin, Georgia, US' },
-              { icon:'⚡', label:'Availability', value:'Open for projects' },
-              { icon:'', label:'Response', value:'Within 24 hours' },
+              { icon:'\u{1F4CD}', label:'Location', value:'Griffin, Georgia, US' },
+              { icon:'\u{26A1}', label:'Availability', value:'Open for projects' },
+              { icon:'\u{1F550}', label:'Response', value:'Within 24 hours' },
             ].map(item => (
               <div key={item.label} className="flex gap-3 sm:gap-4 items-start">
                 <div className="w-9 h-9 sm:w-10 sm:h-10 glass rounded-xl flex items-center justify-center text-lg sm:text-xl flex-shrink-0">{item.icon}</div>
@@ -82,12 +82,12 @@ export default function Contact() {
 
             {status==='success' && (
               <motion.div initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} className="mb-5 p-4 bg-emerald-500/10 border border-emerald-500/25 rounded-xl text-emerald-400 text-sm font-mono">
-                ✅ Message sent! Quinn will get back to you within 24 hours.
+                \u2705 Message sent! Quinn will get back to you within 24 hours.
               </motion.div>
             )}
             {status==='error' && (
               <motion.div initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} className="mb-5 p-4 bg-red-500/10 border border-red-500/25 rounded-xl text-red-400 text-sm font-mono">
-                ❌ {errorMsg}
+                \u274C {errorMsg}
               </motion.div>
             )}
 
