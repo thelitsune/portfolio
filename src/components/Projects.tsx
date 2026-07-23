@@ -98,13 +98,7 @@ function ProjectCard({ project, onPreview }: { project: Project; onPreview: (p: 
       <div className="absolute inset-0 rounded-[18px] transition-opacity duration-500 pointer-events-none"
         style={{ background:`radial-gradient(circle at 50% 0%, ${project.color}12, transparent 65%)`, opacity: hovered?1:0 }}
       />
-      {clickable && (
-        <div className="absolute top-4 right-4 z-20 flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full transition-opacity duration-300"
-          style={{ background:`${project.color}18`, border:`1px solid ${project.color}35`, color: project.color, opacity: hovered ? 1 : 0.7 }}>
-          <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
-          Preview
-        </div>
-      )}
+
       <div className="relative z-10 flex flex-col h-full">
         <div className="flex items-start justify-between mb-4">
           <div className="flex items-center gap-3">
@@ -117,7 +111,16 @@ function ProjectCard({ project, onPreview }: { project: Project; onPreview: (p: 
               </span>
             </div>
           </div>
-          {project.featured && <span className="text-xs font-mono text-accent/50 border border-accent/15 rounded px-2 py-0.5 flex-shrink-0">Featured</span>}
+          <div className="flex items-center gap-2 flex-shrink-0">
+            {clickable && (
+              <span className="flex items-center gap-1.5 text-xs font-mono px-2.5 py-1 rounded-full transition-opacity duration-300"
+                style={{ background:`${project.color}18`, border:`1px solid ${project.color}35`, color: project.color, opacity: hovered ? 1 : 0.7 }}>
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" /><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" /></svg>
+                Preview
+              </span>
+            )}
+            {project.featured && <span className="text-xs font-mono text-accent/50 border border-accent/15 rounded px-2 py-0.5">Featured</span>}
+          </div>
         </div>
         <p className="text-muted text-sm leading-relaxed mb-4 flex-1">{project.longDesc}</p>
         <div className="flex flex-wrap gap-1.5 mb-4">
