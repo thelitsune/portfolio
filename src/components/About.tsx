@@ -25,10 +25,10 @@ export default function About() {
               Turning vision into <span className="gradient-text">reality</span>
             </h2>
             <p className="text-muted text-base sm:text-lg leading-relaxed mb-5">
-              I&apos;m Quinn \u2014 a full-stack developer and entrepreneur based in Griffin, GA. I build everything from collaborative pixel art platforms and inventory SaaS tools to Unity RPG games, always with a focus on clean architecture, performance, and delightful UX.
+              I&apos;m Quinn {'\u2014'} a full-stack developer and entrepreneur based in Griffin, GA. I build everything from collaborative pixel art platforms and inventory SaaS tools to Unity RPG games, always with a focus on clean architecture, performance, and delightful UX.
             </p>
             <p className="text-muted text-base sm:text-lg leading-relaxed mb-8">
-              Great software isn&apos;t just functional \u2014 it tells a story. Whether you need a high-converting landing page, a complex SaaS backend, or an interactive game, I bring both technical depth and creative vision to every build.
+              Great software isn&apos;t just functional {'\u2014'} it tells a story. Whether you need a high-converting landing page, a complex SaaS backend, or an interactive game, I bring both technical depth and creative vision to every build.
             </p>
             <div className="flex flex-wrap gap-2">
               {techBadges.map((t, i) => (

@@ -55,7 +55,7 @@ export default function Projects() {
           >
             {filtered.length === 0 ? (
               <motion.div initial={{ opacity:0 }} animate={{ opacity:1 }} className="sm:col-span-2 text-center py-20">
-                <p className="text-muted font-mono text-sm">// no projects in this category yet \u2014 check back soon</p>
+                <p className="text-muted font-mono text-sm">// no projects in this category yet {'\u2014'} check back soon</p>
               </motion.div>
             ) : (
               filtered.map((project, i) => (

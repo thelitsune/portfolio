@@ -44,7 +44,7 @@ export default function PreviewModal({ url, title, onClose }: PreviewModalProps)
                 <span className="w-2.5 h-2.5 rounded-full bg-red-500/70 flex-shrink-0" />
                 <span className="w-2.5 h-2.5 rounded-full bg-yellow-500/70 flex-shrink-0" />
                 <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/70 flex-shrink-0" />
-                <span className="ml-3 text-xs sm:text-sm font-mono text-muted truncate">{title} \u2014 live preview</span>
+                <span className="ml-3 text-xs sm:text-sm font-mono text-muted truncate">{title} {'\u2014'} live preview</span>
               </div>
               <div className="flex items-center gap-2 flex-shrink-0">
                 <a

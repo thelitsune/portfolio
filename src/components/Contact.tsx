@@ -82,12 +82,12 @@ export default function Contact() {
 
             {status==='success' && (
               <motion.div initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} className="mb-5 p-4 bg-emerald-500/10 border border-emerald-500/25 rounded-xl text-emerald-400 text-sm font-mono">
-                \u2705 Message sent! Quinn will get back to you within 24 hours.
+                {'\u2705'} Message sent! Quinn will get back to you within 24 hours.
               </motion.div>
             )}
             {status==='error' && (
               <motion.div initial={{ opacity:0, scale:0.95 }} animate={{ opacity:1, scale:1 }} className="mb-5 p-4 bg-red-500/10 border border-red-500/25 rounded-xl text-red-400 text-sm font-mono">
-                \u274C {errorMsg}
+                {'\u274C'} {errorMsg}
               </motion.div>
             )}
 
