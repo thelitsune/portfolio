@@ -31,9 +31,10 @@ export async function POST(req: NextRequest) {
 
     const nodemailer = await import('nodemailer');
     const transporter = nodemailer.createTransport({
-      host: process.env.SMTP_HOST || 'smtp.gmail.com',
+      host: process.env.SMTP_HOST || 'smtp.mail.me.com',
       port: parseInt(process.env.SMTP_PORT || '587'),
       secure: false,
+      requireTLS: true,
       auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
     });
 
@@ -66,21 +67,23 @@ export async function POST(req: NextRequest) {
       </body>
       </html>`;
 
-    if (process.env.SMTP_USER && process.env.SMTP_PASS) {
-      await transporter.sendMail({
-        from: `"Quinn Portfolio" <${process.env.SMTP_USER}>`,
-        to: 'admin@litsune.com',
-        replyTo: email,
-        subject: `\u2709\uFE0F New message from ${name} — Quinn Portfolio`,
-        html: emailHtml,
-      });
-    } else {
+    if (!process.env.SMTP_USER || !process.env.SMTP_PASS) {
       console.log('\u{1F4EC} [Contact Form - no SMTP configured]', { name, email, message: message.slice(0, 100) });
+      return NextResponse.json({ error: 'Email service is not configured yet. Please try again later.' }, { status: 500 });
     }
+
+    await transporter.sendMail({
+      from: `"Quinn Portfolio" <${process.env.SMTP_USER}>`,
+      to: 'admin@litsune.com',
+      replyTo: email,
+      subject: `\u2709\uFE0F New message from ${name} — Quinn Portfolio`,
+      html: emailHtml,
+    });
 
     return NextResponse.json({ success: true, message: 'Message received! Quinn will get back to you within 24 hours.' });
   } catch (err) {
     console.error('Contact form error:', err);
-    return NextResponse.json({ error: 'Something went wrong. Please try again.' }, { status: 500 });
+    const detail = err instanceof Error ? err.message : 'Unknown error';
+    return NextResponse.json({ error: `Something went wrong: ${detail}` }, { status: 500 });
   }
 }
